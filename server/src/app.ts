@@ -15,9 +15,28 @@ const allowedOrigins = [
   'https://vaultcircle-tau.vercel.app',
 ]
 
+// app.use((req: Request, res: Response, next: NextFunction) => {
+//   const origin = req.headers.origin as string
+//   if (allowedOrigins.includes(origin)) {
+//     res.setHeader('Access-Control-Allow-Origin', origin)
+//   }
+//   res.setHeader('Access-Control-Allow-Credentials', 'true')
+//   res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE,OPTIONS')
+//   res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+//   if (req.method === 'OPTIONS') {
+//     res.sendStatus(204)
+//     return
+//   }
+//   next()
+// })
+
 app.use((req: Request, res: Response, next: NextFunction) => {
   const origin = req.headers.origin as string
-  if (allowedOrigins.includes(origin)) {
+  const isAllowed =
+    origin === 'http://localhost:3000' ||
+    origin === 'http://localhost:3001' ||
+    (origin && origin.endsWith('.vercel.app'))
+  if (isAllowed) {
     res.setHeader('Access-Control-Allow-Origin', origin)
   }
   res.setHeader('Access-Control-Allow-Credentials', 'true')
