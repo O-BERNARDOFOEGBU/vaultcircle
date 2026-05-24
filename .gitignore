@@ -1,0 +1,12 @@
+cat > .gitignore << 'EOF'
+node_modules
+.env
+.next
+dist
+*.log
+sw.js
+workbox-*.js
+.claude
+CLAUDE.md
+AGENTS.md
+EOF

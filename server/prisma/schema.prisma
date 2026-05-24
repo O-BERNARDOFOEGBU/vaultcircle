@@ -1,0 +1,54 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(uuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  bio          String?
+  occupation   String?
+  savingsGoal  Int?
+  createdAt    DateTime @default(now())
+
+  circlesOwned Circle[]
+  memberships  Membership[]
+}
+
+model Circle {
+  id           String   @id @default(uuid())
+  name         String
+  description  String?
+  targetAmount Int?
+  createdAt    DateTime @default(now())
+
+  ownerId String
+  owner   User   @relation(fields: [ownerId], references: [id])
+
+  members Membership[]
+}
+
+model Membership {
+  id       String   @id @default(uuid())
+  joinedAt DateTime @default(now())
+  role     Role     @default(MEMBER)
+
+  userId   String
+  circleId String
+
+  user   User   @relation(fields: [userId], references: [id])
+  circle Circle @relation(fields: [circleId], references: [id])
+
+  @@unique([userId, circleId])
+}
+
+enum Role {
+  OWNER
+  MEMBER
+}
