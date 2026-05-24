@@ -1,6 +1,6 @@
 # VaultCircle
 
-> A fintech-inspired savings circle platform — built as a fullstack engineering submission for Abbey Mortgage Bank.
+> A fintech-inspired savings circle platform — I built as a fullstack engineering submission for Abbey Mortgage Bank.
 
 **Live Demo:** https://vaultcircle-tau.vercel.app
 **Backend API:** https://vaultcircle-backend.onrender.com/health
@@ -172,13 +172,13 @@ Controllers handle HTTP only — they read from `req`, call a service, and write
 TypeScript types disappear at runtime. Zod schemas validate incoming request bodies at the route level before they reach the controller, returning structured validation errors rather than unexpected crashes.
 
 ### PWA over React Native
-The challenge asked for a mobile demo. Rather than maintaining a separate React Native codebase (which would duplicate all business logic), we built a Progressive Web App that installs on mobile, runs standalone (no browser chrome), and uses a max-430px phone-frame layout that looks and feels native on every screen size. This is a deliberate architectural tradeoff — one codebase, full mobile experience, zero duplication.
+The challenge asked for a mobile demo. Rather than maintaining a separate React Native codebase (which would duplicate all business logic), I built a Progressive Web App that installs on mobile, runs standalone (no browser chrome), and uses a max-430px phone-frame layout that looks and feels native on every screen size. This is a deliberate architectural tradeoff — one codebase, full mobile experience, zero duplication.
 
 ### Prisma v6 with Supabase connection pooling
 Supabase provides two connection strings — a direct URL for migrations and a pooled URL for runtime queries. Prisma's `directUrl` config uses the direct connection for `prisma migrate`, while `DATABASE_URL` uses PgBouncer pooling for all app queries, preventing connection exhaustion on the free tier.
 
 ### Manual CORS middleware over the `cors` package
-Express 5 introduced breaking changes to route matching that caused the `cors` package's preflight handler to crash. We replaced it with a manual middleware that reads the `Origin` header and sets `Access-Control-Allow-Origin` dynamically, supporting both localhost development and all `*.vercel.app` production origins.
+Express 5 introduced breaking changes to route matching that caused the `cors` package's preflight handler to crash. I replaced it with a manual middleware that reads the `Origin` header and sets `Access-Control-Allow-Origin` dynamically, supporting both localhost development and all `*.vercel.app` production origins.
 
 ---
 
