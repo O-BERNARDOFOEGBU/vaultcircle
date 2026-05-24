@@ -1,5 +1,4 @@
 "use client";
-
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -35,9 +34,8 @@ const navItems = [
 
 export default function BottomNav() {
   const pathname = usePathname();
-
   return (
-    <nav className="fixed bottom-0 inset-x-0 z-50 md:hidden bg-white border-t border-slate-100 safe-area-pb">
+    <nav className="absolute bottom-0 left-0 right-0 z-50 bg-white border-t border-slate-100">
       <div className="flex">
         {navItems.map((item) => {
           const active = pathname.startsWith(item.href);
