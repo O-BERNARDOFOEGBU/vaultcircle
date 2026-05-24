@@ -3,11 +3,18 @@ import { signToken } from '../utils/jwt'
 import * as AuthService from '../services/auth.service'
 import { AuthRequest } from '../middleware/auth.middleware'
 
+// const COOKIE_OPTIONS = {
+//   httpOnly: true,
+//   secure: process.env.NODE_ENV === 'production',
+//   sameSite: 'lax' as const,
+//   maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+// }
+
 const COOKIE_OPTIONS = {
   httpOnly: true,
   secure: process.env.NODE_ENV === 'production',
-  sameSite: 'lax' as const,
-  maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+  sameSite: (process.env.NODE_ENV === 'production' ? 'none' : 'lax') as 'none' | 'lax',
+  maxAge: 7 * 24 * 60 * 60 * 1000,
 }
 
 export const register = async (req: Request, res: Response): Promise<void> => {
